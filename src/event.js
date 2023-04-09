@@ -54,120 +54,22 @@ function increment(num) {
                 }
             }
 
-            if (!game.achievements[0] && game.level >= 2) get_achievement(0)
-            if (!game.achievements[1] && game.level >= 10) get_achievement(1)
-            if (!game.achievements[2] && game.level >= 30) get_achievement(2)
-            if (!game.achievements[3] && game.level >= 60) get_achievement(3)
-            if (!game.achievements[4] && game.level >= 100) get_achievement(4)
-            if (!game.achievements[5] && game.level >= 200) get_achievement(5)
-            if (!game.achievements[6] && game.level >= 300) get_achievement(6)
-            if (!game.achievements[7] && game.level >= 500) get_achievement(7)
-            if (!game.achievements[8] && game.level >= 1000) get_achievement(8)
-            if (!game.achievements[9] && game.level >= 2000) get_achievement(9)
-            if (!game.achievements[10] && game.level >= 3000)
-                get_achievement(10)
-            if (!game.achievements[11] && game.level >= 6000)
-                get_achievement(11)
-            if (!game.achievements[12] && game.level >= 12000)
-                get_achievement(12)
-            if (!game.achievements[77] && game.level >= 18000)
-                get_achievement(77)
-            if (!game.achievements[95] && game.level >= 24000)
-                get_achievement(95)
-            if (!game.achievements[97] && game.level >= 30000)
-                get_achievement(97)
-            if (!game.achievements[98] && game.level >= 40000)
-                get_achievement(98)
-            if (!game.achievements[115] && game.level >= 50000)
-                get_achievement(115)
-            if (!game.achievements[116] && game.level >= 60000)
-                get_achievement(116)
-            if (!game.achievements[130] && game.level >= 80000)
-                get_achievement(130)
-            if (!game.achievements[131] && game.level >= 100000)
-                get_achievement(131)
-            if (!game.achievements[135] && game.level >= 150000)
-                get_achievement(135)
-            if (!game.achievements[137] && game.level >= 200000)
-                get_achievement(137)
-            if (!game.achievements[145] && game.level >= 300000)
-                get_achievement(145)
-            if (!game.achievements[149] && game.level >= 500000)
-                get_achievement(149)
-            if (!game.achievements[150] && game.level >= 750000)
-                get_achievement(150)
-            if (!game.achievements[151] && game.level >= 1000000)
-                get_achievement(151)
+            achievements.check_level();
 
             if (game.level >= 5 && !game.hold_notify) {
-                new notify("Protip: you can hold the EXP button", "#ffc400")
-                game.hold_notify = true
+                new notify("Protip: you can hold the EXP button", "#ffc400");
+                game.hold_notify = true;
             }
             if (game.level >= 30 && !game.halfway_notify) {
                 new notify(
                     "Hang in there! Something happens at LVL 60...",
                     "#ffc400"
-                )
-                game.halfway_notify = true
+                );
+                game.halfway_notify = true;
             }
         }
 
-        if (!game.achievements[19] && game.all_time_exp >= 10 ** 6)
-            get_achievement(19)
-        if (!game.achievements[20] && game.all_time_exp >= 10 ** 9)
-            get_achievement(20)
-        if (!game.achievements[21] && game.all_time_exp >= 10 ** 12)
-            get_achievement(21)
-        if (!game.achievements[22] && game.all_time_exp >= 10 ** 15)
-            get_achievement(22)
-        if (!game.achievements[23] && game.all_time_exp >= 10 ** 18)
-            get_achievement(23)
-        if (!game.achievements[24] && game.all_time_exp >= 10 ** 21)
-            get_achievement(24)
-        if (!game.achievements[25] && game.all_time_exp >= 10 ** 24)
-            get_achievement(25)
-        if (!game.achievements[26] && game.all_time_exp >= 10 ** 27)
-            get_achievement(26)
-        if (!game.achievements[27] && game.all_time_exp >= 10 ** 30)
-            get_achievement(27)
-        if (!game.achievements[28] && game.all_time_exp >= 10 ** 33)
-            get_achievement(28)
-        if (!game.achievements[29] && game.all_time_exp >= 10 ** 36)
-            get_achievement(29)
-        if (!game.achievements[30] && game.all_time_exp >= 10 ** 39)
-            get_achievement(30)
-        if (!game.achievements[70] && game.all_time_exp >= 10 ** 42)
-            get_achievement(70)
-        if (!game.achievements[79] && game.all_time_exp >= 10 ** 45)
-            get_achievement(79)
-        if (!game.achievements[80] && game.all_time_exp >= 10 ** 48)
-            get_achievement(80)
-        if (!game.achievements[93] && game.all_time_exp >= 10 ** 51)
-            get_achievement(93)
-        if (!game.achievements[96] && game.all_time_exp >= 10 ** 57)
-            get_achievement(96)
-        if (!game.achievements[99] && game.all_time_exp >= 10 ** 63)
-            get_achievement(99)
-        if (!game.achievements[100] && game.all_time_exp >= 10 ** 75)
-            get_achievement(100)
-        if (!game.achievements[101] && game.all_time_exp >= 10 ** 87)
-            get_achievement(101)
-        if (!game.achievements[102] && game.all_time_exp >= 10 ** 99)
-            get_achievement(102)
-        if (!game.achievements[118] && game.all_time_exp >= 10 ** 111)
-            get_achievement(118)
-        if (!game.achievements[132] && game.all_time_exp >= 10 ** 123)
-            get_achievement(132)
-        if (!game.achievements[134] && game.all_time_exp >= 10 ** 138)
-            get_achievement(134)
-        if (!game.achievements[138] && game.all_time_exp >= 10 ** 153)
-            get_achievement(138)
-        if (!game.achievements[146] && game.all_time_exp >= 10 ** 183)
-            get_achievement(146)
-        if (!game.achievements[152] && game.all_time_exp >= 10 ** 228)
-            get_achievement(152)
-        if (!game.achievements[153] && game.all_time_exp >= 10 ** 303)
-            get_achievement(153)
+        achievements.check_exp();
 
         game.exp = game.total_exp - Math.ceil(get_exp(game.level - 1))
         game.goal = Math.ceil(get_exp(game.level) - get_exp(game.level - 1))
@@ -287,12 +189,8 @@ function upgrade(id, max) {
                             (game.auto_tier +
                                 game.starter_kit +
                                 game.generator_kit)
-                        if (!game.achievements[53] && game.cps >= 30)
-                            get_achievement(53)
-                        if (!game.achievements[54] && game.cps >= 150)
-                            get_achievement(54)
-                        if (!game.achievements[55] && game.cps >= 1000)
-                            get_achievement(55)
+                        
+                        achievements.check_autoclickers();
                     }
                 }
                 break
@@ -530,12 +428,8 @@ function upgrade(id, max) {
                     game.cps =
                         2 *
                         (game.auto_tier + game.starter_kit + game.generator_kit)
-                    if (!game.achievements[53] && game.cps >= 30)
-                        get_achievement(53)
-                    if (!game.achievements[54] && game.cps >= 150)
-                        get_achievement(54)
-                    if (!game.achievements[55] && game.cps >= 1000)
-                        get_achievement(55)
+                    
+                    achievements.check_autoclickers();
                 }
                 break
             case 2:
@@ -972,16 +866,7 @@ function upgrade_prism() {
         game.prism_level++
         game.prism_boost = game.prism_level * (game.prism_level + 4)
 
-        if (!game.achievements[126] && game.prism_level >= 1)
-            get_achievement(126)
-        if (!game.achievements[127] && game.prism_level >= 10)
-            get_achievement(127)
-        if (!game.achievements[125] && game.prism_level >= 30)
-            get_achievement(125)
-        if (!game.achievements[141] && game.prism_level >= 100)
-            get_achievement(141)
-        if (!game.achievements[161] && game.prism_level >= 200)
-            get_achievement(161)
+        achievements.check_prism_level();
     }
 }
 
@@ -1017,12 +902,7 @@ function collapse() {
             game.omega_points++
         }
 
-        if (!game.achievements[162] && game.omega_level >= 1)
-            get_achievement(162)
-        if (!game.achievements[163] && game.omega_level >= 10)
-            get_achievement(163)
-        if (!game.achievements[164] && game.omega_level >= 30)
-            get_achievement(164)
+        achievements.check_omega_level();
     }
 }
 
@@ -1102,22 +982,7 @@ function enter_omega_challenge() {
                     1000000 ** ((highest_level - 65536) / 32768)
                 )
 
-                if (!game.achievements[120] && game.quantum >= 1)
-                    get_achievement(120)
-                if (!game.achievements[121] && game.quantum >= 3)
-                    get_achievement(121)
-                if (!game.achievements[122] && game.quantum >= 5)
-                    get_achievement(122)
-                if (!game.achievements[123] && game.quantum >= 10)
-                    get_achievement(123)
-                if (!game.achievements[124] && game.quantum >= 25)
-                    get_achievement(124)
-                if (!game.achievements[139] && game.quantum >= 50)
-                    get_achievement(139)
-                if (!game.achievements[140] && game.quantum >= 100)
-                    get_achievement(140)
-                if (!game.achievements[160] && game.quantum >= 1000)
-                    get_achievement(160)
+                achievements.check_quantum_count();
 
                 if (!game.achievements[168] && game.hps === 0)
                     get_achievement(168)
@@ -1148,31 +1013,7 @@ function enter_omega_challenge() {
                 if (game.reboot_time < game.fastest_quantize)
                     game.fastest_quantize = game.reboot_time
 
-                if (
-                    !game.achievements[128] &&
-                    game.fastest_quantize <= game.tickspeed * 3600
-                )
-                    get_achievement(128)
-                if (
-                    !game.achievements[129] &&
-                    game.fastest_quantize <= game.tickspeed * 300
-                )
-                    get_achievement(129)
-                if (
-                    !game.achievements[136] &&
-                    game.fastest_quantize <= game.tickspeed * 60
-                )
-                    get_achievement(136)
-                if (
-                    !game.achievements[142] &&
-                    game.fastest_quantize <= game.tickspeed * 30
-                )
-                    get_achievement(142)
-                if (
-                    !game.achievements[147] &&
-                    game.fastest_quantize <= game.tickspeed * 10
-                )
-                    get_achievement(147)
+                achievements.check_quantum_speed();
 
                 if (game.reboot_highest_level > game.all_time_highest_level)
                     game.all_time_highest_level = game.reboot_highest_level

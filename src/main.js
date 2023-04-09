@@ -3,118 +3,9 @@ let delta_time = undefined
 
 //game operations run every tick
 function tick() {
-    //calculating total multiplier
-    game.global_multiplier =
-        game.exp_fact *
-        game.exp_oc *
-        game.exp_flux *
-        game.pp_power *
-        game.prestige_power *
-        game.depth_power *
-        game.ach_power *
-        game.speed_power *
-        game.ch_boost[0] *
-        game.ch_boost[1] *
-        game.ch_boost[2] *
-        game.ch_boost[3] *
-        game.ch_boost[4] *
-        game.ch_boost[5] *
-        game.ch_boost[6] *
-        game.ch_boost[7] *
-        game.ch_boost[8] *
-        game.helium_boost *
-        game.superspeed_power *
-        game.dark_matter_boost *
-        game.infusion
+    game.global_multiplier = exp.multiplier();
 
-    if (game.challenge === 7) {
-        game.global_multiplier =
-            game.ch_boost[0] *
-            game.ch_boost[1] *
-            game.ch_boost[2] *
-            game.ch_boost[3] *
-            game.ch_boost[4] *
-            game.ch_boost[5] *
-            game.ch_boost[6] *
-            game.ch_boost[7] *
-            game.ch_boost[8] *
-            game.helium_boost
-    }
-
-    //challenge 5, 6 and 9
-    if (game.challenge === 5) {
-        if (game.prestige_time >= 30 * game.tickspeed) {
-            reduction = 0
-        } else {
-            reduction = (1 - game.prestige_time / (30 * game.tickspeed)) ** 4
-        }
-    } else if (game.challenge === 6) {
-        if (game.dk_bought[3]) {
-            if (game.completions[5] >= 12) {
-                reduction = 10 ** (-6 * (game.completions[5] - 11))
-            } else {
-                reduction = 10 ** -12
-            }
-        } else {
-            reduction = 10 ** -12
-        }
-    } else if (game.challenge === 9) {
-        reduction = 10 ** -16
-    } else {
-        reduction = 1
-    }
-
-    //omega challenge
-    if (game.omega_challenge) {
-        if (game.challenge !== 7) {
-            reduction /=
-                ((game.exp_add + game.exp_fluct / 2) *
-                    game.global_multiplier *
-                    game.exp_battery) **
-                0.5
-        } else {
-            reduction /= (game.exp_add * game.global_multiplier) ** 0.5
-        }
-    }
-
-    game.global_multiplier *= reduction
-
-    //autoclicker operation
-    if (game.cps > 0) {
-        game.click_time += game.cps / delta_time
-        if (game.click_time >= 1) {
-            if (game.challenge !== 7) {
-                if (game.battery_mode === 1 || game.perks[8])
-                    increment(
-                        Math.round(
-                            (game.exp_add + fluct_increment(game.exp_fluct)) *
-                                Math.floor(game.click_time) *
-                                game.global_multiplier *
-                                game.exp_battery *
-                                game.cap_boost
-                        )
-                    )
-                else
-                    increment(
-                        Math.round(
-                            (game.exp_add + fluct_increment(game.exp_fluct)) *
-                                Math.floor(game.click_time) *
-                                game.global_multiplier *
-                                game.cap_boost
-                        )
-                    )
-            } else {
-                increment(
-                    Math.round(
-                        game.exp_add *
-                            Math.floor(game.click_time) *
-                            game.global_multiplier
-                    )
-                )
-            }
-            game.click_time -= Math.floor(game.click_time)
-        }
-    }
+    exp.autoclick();
 
     //amp conversion
     if (
@@ -124,7 +15,7 @@ function tick() {
             game.challenge === 4 &&
             game.dk_bought[3] &&
             game.completions[3] >= 12
-        )
+    )
     ) {
         if (game.challenge === 4) {
             if (game.level >= game.highest_level) {
@@ -132,41 +23,16 @@ function tick() {
                     game.amp += Math.floor(
                         (get_amp(game.level) * game.watt_boost * 0.2) /
                             delta_time
-                    )
+                    );
                 else
                     game.amp += Math.floor(
                         (get_amp(game.level) *
-                            game.patience *
-                            game.watt_boost) /
-                            delta_time
-                    )
-
-                if (!game.achievements[36] && game.amp >= 100)
-                    get_achievement(36)
-                if (!game.achievements[37] && game.amp >= 10000)
-                    get_achievement(37)
-                if (!game.achievements[38] && game.amp >= 10 ** 6)
-                    get_achievement(38)
-                if (!game.achievements[39] && game.amp >= 10 ** 8)
-                    get_achievement(39)
-                if (!game.achievements[40] && game.amp >= 10 ** 10)
-                    get_achievement(40)
-                if (!game.achievements[41] && game.amp >= 10 ** 12)
-                    get_achievement(41)
-                if (!game.achievements[42] && game.amp >= 10 ** 14)
-                    get_achievement(42)
-                if (!game.achievements[71] && game.amp >= 10 ** 16)
-                    get_achievement(71)
-                if (!game.achievements[81] && game.amp >= 10 ** 18)
-                    get_achievement(81)
-                if (!game.achievements[94] && game.amp >= 10 ** 20)
-                    get_achievement(94)
-                if (!game.achievements[103] && game.amp >= 10 ** 24)
-                    get_achievement(103)
-                if (!game.achievements[117] && game.amp >= 10 ** 28)
-                    get_achievement(117)
-                if (!game.achievements[133] && game.amp >= 10 ** 32)
-                    get_achievement(133)
+                        game.patience *
+                        game.watt_boost) /
+                        delta_time
+                        );
+                        
+                achievements.check_amp();
             }
         } else {
             if (game.level >= game.pr_min) {
@@ -177,7 +43,7 @@ function tick() {
                             game.watt_boost *
                             0.2) /
                             delta_time
-                    )
+                            )
                 else
                     game.amp += Math.floor(
                         (get_amp(game.level) *
@@ -185,37 +51,12 @@ function tick() {
                             game.watt_boost) /
                             delta_time
                     )
-
-                if (!game.achievements[36] && game.amp >= 100)
-                    get_achievement(36)
-                if (!game.achievements[37] && game.amp >= 10000)
-                    get_achievement(37)
-                if (!game.achievements[38] && game.amp >= 10 ** 6)
-                    get_achievement(38)
-                if (!game.achievements[39] && game.amp >= 10 ** 8)
-                    get_achievement(39)
-                if (!game.achievements[40] && game.amp >= 10 ** 10)
-                    get_achievement(40)
-                if (!game.achievements[41] && game.amp >= 10 ** 12)
-                    get_achievement(41)
-                if (!game.achievements[42] && game.amp >= 10 ** 14)
-                    get_achievement(42)
-                if (!game.achievements[71] && game.amp >= 10 ** 16)
-                    get_achievement(71)
-                if (!game.achievements[81] && game.amp >= 10 ** 18)
-                    get_achievement(81)
-                if (!game.achievements[94] && game.amp >= 10 ** 20)
-                    get_achievement(94)
-                if (!game.achievements[103] && game.amp >= 10 ** 24)
-                    get_achievement(103)
-                if (!game.achievements[117] && game.amp >= 10 ** 28)
-                    get_achievement(117)
-                if (!game.achievements[133] && game.amp >= 10 ** 32)
-                    get_achievement(133)
+                    
+                achievements.check_amp();
             }
         }
     }
-
+    
     //incrementing time statistics
     game.time += 30 / delta_time
     game.prestige_time += 30 / delta_time
@@ -223,20 +64,32 @@ function tick() {
     game.all_time += 30 / delta_time
     game.afk_time += 30 / delta_time
 
+    //time based achievements
+    achievements.check_playtime();
+
+    //spontaneous fortune
+    if (Math.floor(game.all_time) % game.tickspeed === 0) {
+        const roll = Math.random();
+        if (!game.achievements[66] && roll < 1 / 7777) {
+            achievements.award(66);
+        }
+    }
+    
     //photon colors
+    
+    const hue = ((game.all_time * 72) / game.tickspeed) % 360;
+
     document.documentElement.style.setProperty(
         "--photon_color",
-        "hsl(" + (((game.all_time * 72) / game.tickspeed) % 360) + ",100%,75%)"
-    )
+        `hsl(${hue},100%,75%)`
+        )
     document.documentElement.style.setProperty(
-        "--photon_color2",
-        "hsl(" + (((game.all_time * 72) / game.tickspeed) % 360) + ",100%,50%)"
+            "--photon_color2",
+        `hsl(${hue},100%,50%)`
     )
     document.documentElement.style.setProperty(
         "--photon_color3",
-        "hsl(" +
-            (((game.all_time * 72) / game.tickspeed) % 360) +
-            ",100%,12.5%)"
+        `hsl(${hue},100%,12.5%)`
     )
 
     //ease of completion
@@ -322,21 +175,10 @@ function tick() {
         }
     }
 
-    //time based achievements
-    if (!game.achievements[31] && game.all_time >= 3600 * game.tickspeed)
-        get_achievement(31)
-    if (!game.achievements[32] && game.all_time >= 21600 * game.tickspeed)
-        get_achievement(32)
-    if (!game.achievements[33] && game.all_time >= 86400 * game.tickspeed)
-        get_achievement(33)
-    if (!game.achievements[34] && game.all_time >= 259200 * game.tickspeed)
-        get_achievement(34)
-    if (!game.achievements[35] && game.all_time >= 604800 * game.tickspeed)
-        get_achievement(35)
 
     //achievement for all upgrades tab unlocks
+    // TODO: Move this upgrade; it should not be updated every tick.
     if (
-        !game.achievements[50] &&
         game.pp_bought[0] &&
         game.pp_bought[5] &&
         game.pp_bought[14] &&
@@ -344,19 +186,11 @@ function tick() {
         game.pp_bought[25] &&
         game.pp_bought[32]
     )
-        get_achievement(50)
-
-    //spontaneous fortune
-    if (Math.floor(game.all_time) % game.tickspeed === 0) {
-        let roll = Math.random()
-        if (!game.achievements[66] && roll < 1 / 7777) {
-            get_achievement(66)
-        }
-    }
+        achievements.award(50);
 
     //a whole lot of nothing
-    if (!game.achievements[63] && game.afk_time >= 600 * game.tickspeed)
-        get_achievement(63)
+    if (game.afk_time >= 600 * game.tickspeed)
+        achievements.award(63)
 
     //discharge automation
     if (
@@ -649,6 +483,8 @@ function tick() {
     }
 
     //overclocker handling
+    overclocker.tick();
+    /*
     if (
         game.pp_bought[14] &&
         game.challenge !== 1 &&
@@ -758,7 +594,7 @@ function tick() {
                     "#ff7f00"
             document.getElementById("oc_progress").style.width = "100%"
         }
-    }
+    } 
 
     //overclocker automation
     if (
@@ -772,15 +608,11 @@ function tick() {
         if (game.oc_state === 1) {
             oc_activate()
         }
-    }
+    } */
 
     //patience handling
     if (game.pp_bought[29]) {
-        if (game.time > 10 * game.tickspeed) {
-            game.patience = 30
-        } else {
-            game.patience = 1 + 0.29 * (game.time / game.tickspeed) ** 2
-        }
+        game.patience = Math.min(1 + 0.29 * (game.time / game.tickspeed) ** 2, 30)
     }
 
     //capacitance handling

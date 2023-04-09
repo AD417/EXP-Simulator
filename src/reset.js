@@ -110,66 +110,9 @@ function prestige() {
             game.amp_time[0] = game.time / game.tickspeed
             game.amp_eff[0] = game.amp_amount[0] / game.amp_time[0]
 
-            if (
-                !game.achievements[13] &&
-                game.prestige + game.banked_prestige >= 1
-            )
-                get_achievement(13)
-            if (
-                !game.achievements[14] &&
-                game.prestige + game.banked_prestige >= 10
-            )
-                get_achievement(14)
-            if (
-                !game.achievements[15] &&
-                game.prestige + game.banked_prestige >= 100
-            )
-                get_achievement(15)
-            if (
-                !game.achievements[16] &&
-                game.prestige + game.banked_prestige >= 1000
-            )
-                get_achievement(16)
-            if (
-                !game.achievements[17] &&
-                game.prestige + game.banked_prestige >= 10000
-            )
-                get_achievement(17)
-            if (
-                !game.achievements[18] &&
-                game.prestige + game.banked_prestige >= 100000
-            )
-                get_achievement(18)
-            if (
-                !game.achievements[78] &&
-                game.prestige + game.banked_prestige >= 1000000
-            )
-                get_achievement(78)
+            achievements.check_prestige_count();
 
-            if (!game.achievements[36] && game.amp >= 100) get_achievement(36)
-            if (!game.achievements[37] && game.amp >= 10000) get_achievement(37)
-            if (!game.achievements[38] && game.amp >= 10 ** 6)
-                get_achievement(38)
-            if (!game.achievements[39] && game.amp >= 10 ** 8)
-                get_achievement(39)
-            if (!game.achievements[40] && game.amp >= 10 ** 10)
-                get_achievement(40)
-            if (!game.achievements[41] && game.amp >= 10 ** 12)
-                get_achievement(41)
-            if (!game.achievements[42] && game.amp >= 10 ** 14)
-                get_achievement(42)
-            if (!game.achievements[71] && game.amp >= 10 ** 16)
-                get_achievement(71)
-            if (!game.achievements[81] && game.amp >= 10 ** 18)
-                get_achievement(81)
-            if (!game.achievements[94] && game.amp >= 10 ** 20)
-                get_achievement(94)
-            if (!game.achievements[103] && game.amp >= 10 ** 24)
-                get_achievement(103)
-            if (!game.achievements[117] && game.amp >= 10 ** 28)
-                get_achievement(117)
-            if (!game.achievements[133] && game.amp >= 10 ** 32)
-                get_achievement(133)
+            achievements.check_amp();
 
             if (game.time < game.fastest_prestige)
                 game.fastest_prestige = game.time
@@ -340,66 +283,9 @@ function prestige() {
             game.amp_time[0] = game.time / game.tickspeed
             game.amp_eff[0] = game.amp_amount[0] / game.amp_time[0]
 
-            if (
-                !game.achievements[13] &&
-                game.prestige + game.banked_prestige >= 1
-            )
-                get_achievement(13)
-            if (
-                !game.achievements[14] &&
-                game.prestige + game.banked_prestige >= 10
-            )
-                get_achievement(14)
-            if (
-                !game.achievements[15] &&
-                game.prestige + game.banked_prestige >= 100
-            )
-                get_achievement(15)
-            if (
-                !game.achievements[16] &&
-                game.prestige + game.banked_prestige >= 1000
-            )
-                get_achievement(16)
-            if (
-                !game.achievements[17] &&
-                game.prestige + game.banked_prestige >= 10000
-            )
-                get_achievement(17)
-            if (
-                !game.achievements[18] &&
-                game.prestige + game.banked_prestige >= 100000
-            )
-                get_achievement(18)
-            if (
-                !game.achievements[78] &&
-                game.prestige + game.banked_prestige >= 1000000
-            )
-                get_achievement(78)
+            achievements.check_prestige_count();
 
-            if (!game.achievements[36] && game.amp >= 100) get_achievement(36)
-            if (!game.achievements[37] && game.amp >= 10000) get_achievement(37)
-            if (!game.achievements[38] && game.amp >= 10 ** 6)
-                get_achievement(38)
-            if (!game.achievements[39] && game.amp >= 10 ** 8)
-                get_achievement(39)
-            if (!game.achievements[40] && game.amp >= 10 ** 10)
-                get_achievement(40)
-            if (!game.achievements[41] && game.amp >= 10 ** 12)
-                get_achievement(41)
-            if (!game.achievements[42] && game.amp >= 10 ** 14)
-                get_achievement(42)
-            if (!game.achievements[71] && game.amp >= 10 ** 16)
-                get_achievement(71)
-            if (!game.achievements[81] && game.amp >= 10 ** 18)
-                get_achievement(81)
-            if (!game.achievements[94] && game.amp >= 10 ** 20)
-                get_achievement(94)
-            if (!game.achievements[103] && game.amp >= 10 ** 24)
-                get_achievement(103)
-            if (!game.achievements[117] && game.amp >= 10 ** 28)
-                get_achievement(117)
-            if (!game.achievements[133] && game.amp >= 10 ** 32)
-                get_achievement(133)
+            achievements.check_amp();
 
             if (game.time < game.fastest_prestige)
                 game.fastest_prestige = game.time
@@ -791,65 +677,7 @@ function reboot() {
                             break
                     }
 
-                    if (
-                        !game.achievements[91] &&
-                        game.completions[0] +
-                            game.completions[1] +
-                            game.completions[2] +
-                            game.completions[3] +
-                            game.completions[4] +
-                            game.completions[5] +
-                            game.completions[6] +
-                            game.completions[7] +
-                            game.completions[8] >=
-                            27
-                    )
-                        get_achievement(91)
-
-                    if (
-                        !game.achievements[113] &&
-                        game.completions[0] +
-                            game.completions[1] +
-                            game.completions[2] +
-                            game.completions[3] +
-                            game.completions[4] +
-                            game.completions[5] +
-                            game.completions[6] +
-                            game.completions[7] +
-                            game.completions[8] >=
-                            54
-                    )
-                        get_achievement(113)
-
-                    if (
-                        !game.achievements[114] &&
-                        game.completions[0] +
-                            game.completions[1] +
-                            game.completions[2] +
-                            game.completions[3] +
-                            game.completions[4] +
-                            game.completions[5] +
-                            game.completions[6] +
-                            game.completions[7] +
-                            game.completions[8] >=
-                            108
-                    )
-                        get_achievement(114)
-
-                    if (
-                        !game.achievements[159] &&
-                        game.completions[0] +
-                            game.completions[1] +
-                            game.completions[2] +
-                            game.completions[3] +
-                            game.completions[4] +
-                            game.completions[5] +
-                            game.completions[6] +
-                            game.completions[7] +
-                            game.completions[8] >=
-                            180
-                    )
-                        get_achievement(159)
+                    achievements.check_challenge_completions();
 
                     if (!game.achievements[92] && game.blind)
                         get_achievement(92)
@@ -951,16 +779,7 @@ function reboot() {
             game.amp_time = new Array(5).fill(-1)
             game.amp_eff = new Array(5).fill(-1)
 
-            if (!game.achievements[56] && game.reboot >= 1) get_achievement(56)
-            if (!game.achievements[57] && game.reboot >= 3) get_achievement(57)
-            if (!game.achievements[58] && game.reboot >= 5) get_achievement(58)
-            if (!game.achievements[59] && game.reboot >= 10) get_achievement(59)
-            if (!game.achievements[72] && game.reboot >= 25) get_achievement(72)
-            if (!game.achievements[73] && game.reboot >= 50) get_achievement(73)
-            if (!game.achievements[82] && game.reboot >= 100)
-                get_achievement(82)
-            if (!game.achievements[83] && game.reboot >= 1000)
-                get_achievement(83)
+            achievements.check_reboot_count();
 
             if (!game.achievements[62] && game.no_automation)
                 get_achievement(62)
@@ -983,23 +802,8 @@ function reboot() {
 
             if (game.prestige_time < game.fastest_reboot)
                 game.fastest_reboot = game.prestige_time
-            if (
-                !game.achievements[60] &&
-                game.fastest_reboot < 3600 * game.tickspeed
-            )
-                get_achievement(60)
-            if (
-                !game.achievements[74] &&
-                game.fastest_reboot < 600 * game.tickspeed
-            )
-                get_achievement(74)
-            if (
-                !game.achievements[84] &&
-                game.fastest_reboot < 60 * game.tickspeed
-            )
-                get_achievement(84)
-            if (!game.achievements[85] && game.fastest_reboot < game.tickspeed)
-                get_achievement(85)
+            
+            achievements.check_reboot_speed();
 
             if (game.perks[18] && game.challenge === 0) {
                 game.true_banked_prestige += Math.floor(game.prestige / 4)
@@ -1318,22 +1122,7 @@ function quantize() {
                     1000000 ** ((highest_level - 65536) / 32768)
                 )
 
-            if (!game.achievements[120] && game.quantum >= 1)
-                get_achievement(120)
-            if (!game.achievements[121] && game.quantum >= 3)
-                get_achievement(121)
-            if (!game.achievements[122] && game.quantum >= 5)
-                get_achievement(122)
-            if (!game.achievements[123] && game.quantum >= 10)
-                get_achievement(123)
-            if (!game.achievements[124] && game.quantum >= 25)
-                get_achievement(124)
-            if (!game.achievements[139] && game.quantum >= 50)
-                get_achievement(139)
-            if (!game.achievements[140] && game.quantum >= 100)
-                get_achievement(140)
-            if (!game.achievements[160] && game.quantum >= 1000)
-                get_achievement(160)
+            achievements.check_quantum_count();
 
             if (!game.achievements[168] && game.hps === 0) get_achievement(168)
 
@@ -1367,31 +1156,7 @@ function quantize() {
             if (game.reboot_time < game.fastest_quantize)
                 game.fastest_quantize = game.reboot_time
 
-            if (
-                !game.achievements[128] &&
-                game.fastest_quantize <= game.tickspeed * 3600
-            )
-                get_achievement(128)
-            if (
-                !game.achievements[129] &&
-                game.fastest_quantize <= game.tickspeed * 300
-            )
-                get_achievement(129)
-            if (
-                !game.achievements[136] &&
-                game.fastest_quantize <= game.tickspeed * 60
-            )
-                get_achievement(136)
-            if (
-                !game.achievements[142] &&
-                game.fastest_quantize <= game.tickspeed * 30
-            )
-                get_achievement(142)
-            if (
-                !game.achievements[147] &&
-                game.fastest_quantize <= game.tickspeed * 10
-            )
-                get_achievement(147)
+            achievements.check_quantum_speed();
 
             if (game.reboot_highest_level > game.all_time_highest_level)
                 game.all_time_highest_level = game.reboot_highest_level

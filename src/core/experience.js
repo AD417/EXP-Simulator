@@ -21,7 +21,7 @@ const exp = {
 
         multiplier *= 
             game.exp_fact *
-            game.exp_oc *
+            overclocker.effect *
             game.exp_flux *
             game.pp_power *
             game.prestige_power *

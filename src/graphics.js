@@ -5139,8 +5139,8 @@ function regenerate_ui() {
     }
     pr_toggle()
     pr_toggle()
-    oc_toggle()
-    oc_toggle()
+    overclocker.toggle_automation();
+    overclocker.toggle_automation();
     ds_toggle()
     ds_toggle()
     if (game.perks[11]) ds_toggle()
@@ -5227,7 +5227,7 @@ function regenerate_ui() {
             case 2:
                 document.getElementById("oc_button").style.display = "none"
                 document.getElementById("oc_state").innerHTML =
-                    "Boosting " + format_num(game.exp_oc) + "x"
+                    "Boosting " + format_num(overclocker.effect) + "x"
                 document.getElementById("oc_timer").style.display = "block"
                 if (!meme)
                     document.getElementById("oc_progress").style.background =

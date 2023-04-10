@@ -1748,7 +1748,6 @@ function load(savegame) {
         if (minor < 100) {
             game.amp_eff = 0
             game.autopr_mode = 0
-            game.exp_oc = 1
             game.oc_state = 0
             game.oc_time = game.tickspeed * 180
         }
@@ -2496,13 +2495,13 @@ new configurable_hotkey("Quantize", "KeyQ", quantize, () => game.quantum >= 1)
 new configurable_hotkey(
     "Activate Overclocker",
     "KeyO",
-    oc_activate,
+    overclocker.activate,
     () => game.pp_bought[14] || game.reboot > 0 || game.quantum > 0
 )
 new configurable_hotkey(
     "Toggle auto-Overclock",
     "Shift+KeyO",
-    oc_toggle,
+    overclocker.toggle_automation,
     () => game.pp_bought[16] || game.reboot > 0 || game.quantum > 0
 )
 new configurable_hotkey(

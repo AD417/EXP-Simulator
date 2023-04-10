@@ -639,6 +639,7 @@ function upgrade(id, max) {
 }
 
 //overclocker activation
+/*
 function oc_activate() {
     if (game.challenge !== 1 && game.challenge !== 9) {
         game.oc_state = 2
@@ -652,6 +653,7 @@ function oc_activate() {
         document.getElementById("oc_progress").style.background = "#ff7f00"
     }
 }
+*/
 
 //capacitance switching
 function set_capacitance(mode) {
@@ -808,7 +810,7 @@ function enter_challenge(id) {
 
             game.global_multiplier =
                 game.exp_fact *
-                game.exp_oc *
+                overclocker.effect *
                 game.exp_flux *
                 game.pp_power *
                 game.prestige_power *

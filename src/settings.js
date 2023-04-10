@@ -66,9 +66,9 @@ function notation() {
     watts_update()
     challenge_update()
     reactor_update()
-    if (game.oc_state === 2)
+    if (overclocker.is_boosting)
         document.getElementById("oc_state").innerHTML =
-            "Boosting " + format_num(game.exp_oc) + "x"
+            "Boosting " + format_num(overclocker.effect) + "x"
     pp_upgrade.upgrades[24].desc =
         "Unautomated clicks are boosted a further +32% for every Autoclicker tier<br>(Currently: " +
         format_eff(16 + game.cps * 0.16) +

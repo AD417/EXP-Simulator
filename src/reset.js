@@ -440,7 +440,6 @@ function respec() {
         game.pr_min = 60
         game.starter_kit = 0
         document.getElementById("auto_mode").style.display = "none"
-        game.exp_oc = 1
         game.oc_state = 0
         game.oc_time = 0
         document.getElementById("overclock").style.display = "none"
@@ -837,7 +836,6 @@ function reboot() {
             game.starter_kit = 0
             game.pp_power = 1
 
-            game.exp_oc = 1
             game.exp_battery = 1
             game.pp_power = 1
             game.prestige_power = 1
@@ -976,7 +974,6 @@ function empty_reboot() {
     game.starter_kit = 0
     game.pp_power = 1
 
-    game.exp_oc = 1
     game.exp_battery = 1
     game.pp_power = 1
     game.prestige_power = 1

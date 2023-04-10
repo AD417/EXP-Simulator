@@ -10,10 +10,10 @@ const overclocker = {
         if (!overclocker.unlocked) return;
         game.oc_state = overclocker.BOOSTING;
         game.oc_time = overclocker.boost_time();
-        game.exp_oc = overclocker.effect;   
+        // game.exp_oc = overclocker.effect;   
         
         document.getElementById("oc_state").innerHTML =
-            "Boosting " + format_num(game.exp_oc) + "x"
+            "Boosting " + format_num(overclocker.effect) + "x"
         document.getElementById("oc_button").style.display = "none"
         document.getElementById("oc_timer").style.display = "block"
         if (!meme)
@@ -21,6 +21,9 @@ const overclocker = {
 
     },
 
+    /**
+     * Determine 
+     */
     get automated() {
         return overclocker.unlocked && 
                 game.autooc_toggle && 
@@ -118,8 +121,6 @@ const overclocker = {
         game.oc_time = Math.max(game.oc_time - 30 / delta_time, 0);
 
         if (game.oc_time === 0) {
-            // TODO: remove exp_oc wholesale; replace it with overclocker.effect()
-            game.exp_oc = 1;
             game.oc_state = overclocker.RECHARGING;
             document.getElementById("oc_state").innerHTML = "Recharging"
             if (!meme)
@@ -155,6 +156,17 @@ const overclocker = {
         document.getElementById("oc_button").style.display = "inline";
         document.getElementById("oc_state").innerHTML = "Standby";
         document.getElementById("oc_timer").style.display = "none";
+    },
+
+    /**
+     * Toggle the overclocker automation.
+     */
+    toggle_automation: () => {
+        game.autooc_toggle = !game.autooc_toggle;
+        document.getElementById("oc_auto").innerHTML = 
+            (game.autooc_toggle ? "ON" : "OFF");
+        if (!meme) document.getElementById("oc_auto").style.color =
+            (game.autooc_toggle ? "#00ff00" : "#ff0000");
     },
 
     /** 

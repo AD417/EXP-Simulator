@@ -109,6 +109,7 @@ function pr_toggle() {
 }
 
 //overclock automation toggle
+/*
 function oc_toggle() {
     if (!game.autooc_toggle) {
         game.autooc_toggle = true
@@ -119,7 +120,7 @@ function oc_toggle() {
         document.getElementById("oc_auto").innerHTML = "OFF"
         if (!meme) document.getElementById("oc_auto").style.color = "#ff0000"
     }
-}
+} */
 
 //discharge automation toggle
 function ds_toggle() {
@@ -584,8 +585,8 @@ function toggle_all_automation() {
     pr_toggle()
     smart_toggle()
     smart_toggle()
-    oc_toggle()
-    oc_toggle()
+    overclocker.toggle_automation();
+    overclocker.toggle_automation();
     ds_toggle()
     ds_toggle()
     if (game.perks[11]) ds_toggle()

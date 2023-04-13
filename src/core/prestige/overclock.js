@@ -13,16 +13,16 @@ const overclocker = {
         // game.exp_oc = overclocker.effect;   
         
         document.getElementById("oc_state").innerHTML =
-            "Boosting " + format_num(overclocker.effect) + "x"
-        document.getElementById("oc_button").style.display = "none"
-        document.getElementById("oc_timer").style.display = "block"
+            "Boosting " + format_num(overclocker.effect) + "x";
+        document.getElementById("oc_button").style.display = "none";
+        document.getElementById("oc_timer").style.display = "block";
         if (!meme)
-            document.getElementById("oc_progress").style.background = "#ff7f00"
+            document.getElementById("oc_progress").style.background = "#ff7f00";
 
     },
 
     /**
-     * Determine 
+     * Determine if the overclocker is currently automated.
      */
     get automated() {
         return overclocker.unlocked && 
@@ -34,7 +34,7 @@ const overclocker = {
     * Determine how long the overclocker should boost EXP production.
     * @return {Number} The number of ticks the overclocker should boost for.
     */
-    boost_time: () => {
+    boost_time() {
         let time = 45 * game.tickspeed;
         if (game.pp_bought[21]) time *= 2;
         // TODO: it's possible for the boost to be infinite.
@@ -43,7 +43,7 @@ const overclocker = {
     },
 
     /** 
-    * Determine if the overclocker is currently boosting EXP production.
+    * Whether the overclocker is currently boosting EXP production.
     * @return {Boolean} Whether the overclocker is boosting EXP production.
     */
     get is_boosting() { 
@@ -62,10 +62,9 @@ const overclocker = {
     },
 
     /** 
-    * Determine how long the overclocker should recharge before the next boost.
-    * @return {Number} The number of ticks the overclocker should recharge.
+    * How long the overclocker should recharge before the next boost, in ticks.
     */
-    recharge_time: () => {
+    get recharge_time() {
         let time = 360 * game.tickspeed;
         if (game.pp_bought[26]) time /= 2;
         if (game.perks[5]) time /= 2;
@@ -75,25 +74,25 @@ const overclocker = {
     /** 
     * Handle the overclocker's behaviour for this tick.
     */
-    tick: () => {
+    tick() {
         if (!overclocker.unlocked) return;
 
         switch (game.oc_state) {
-            case overclocker.RECHARGING:
-                overclocker.tick_recharge();
-                break;
+        case overclocker.RECHARGING:
+            overclocker.tick_recharge();
+            break;
 
-            case overclocker.STANDBY: 
-                if (overclocker.automated) overclocker.activate();
-                break;
+        case overclocker.STANDBY: 
+            if (overclocker.automated) overclocker.activate();
+            break;
 
-            case overclocker.BOOSTING:
-                overclocker.tick_boost();
-                break;
+        case overclocker.BOOSTING:
+            overclocker.tick_boost();
+            break;
         }
 
         if (game.notation === 8) {
-            document.getElementById("oc_progress").style.width = "100%"
+            document.getElementById("oc_progress").style.width = "100%";
         }
 
         if (game.perks[20]) {
@@ -106,30 +105,30 @@ const overclocker = {
             //     document.getElementById("oc_progress").style.background =
             //         "#ff7f00"
             overclocker.activate();
-            document.getElementById("oc_auto").style.display = "none"
-            document.getElementById("oc_progress").style.width = "100%"
-            document.getElementById("oc_timer").innerHTML = "∞ Left"
+            document.getElementById("oc_auto").style.display = "none";
+            document.getElementById("oc_progress").style.width = "100%";
+            document.getElementById("oc_timer").innerHTML = "∞ Left";
         }
     },
     
     /** 
     * Handle the overclocker's behaviour for this tick if it is currently boosting.
     */
-    tick_boost: () => {
+    tick_boost() {
         const boost_time = overclocker.boost_time();
 
         game.oc_time = Math.max(game.oc_time - 30 / delta_time, 0);
 
         if (game.oc_time === 0) {
             game.oc_state = overclocker.RECHARGING;
-            document.getElementById("oc_state").innerHTML = "Recharging"
+            document.getElementById("oc_state").innerHTML = "Recharging";
             if (!meme)
-                document.getElementById("oc_progress").style.background = "#ff2f00"
+                document.getElementById("oc_progress").style.background = "#ff2f00";
         } else {
             document.getElementById("oc_timer").innerHTML =
-                format_time(game.oc_time) + " Left"
+                format_time(game.oc_time) + " Left";
             document.getElementById("oc_progress").style.width =
-                `${(100 * game.oc_time) / boost_time}%`
+                `${(100 * game.oc_time) / boost_time}%`;
         }
         
     },
@@ -137,8 +136,8 @@ const overclocker = {
     /** 
     * Handle the overclocker's behaviour for this tick if it is currently recharging.
     */
-    tick_recharge: () => {
-        const recharge_time = overclocker.recharge_time();
+    tick_recharge() {
+        const recharge_time = overclocker.recharge_time;
         const boost_time = overclocker.boost_time();
 
         game.oc_time += 30 / delta_time;
@@ -161,7 +160,7 @@ const overclocker = {
     /**
      * Toggle the overclocker automation.
      */
-    toggle_automation: () => {
+    toggle_automation() {
         game.autooc_toggle = !game.autooc_toggle;
         document.getElementById("oc_auto").innerHTML = 
             (game.autooc_toggle ? "ON" : "OFF");
@@ -171,10 +170,9 @@ const overclocker = {
 
     /** 
     * Determine if the overclocker is currently unlocked.
-    * @return {Boolean} Whether the overclocker is unlocked.
     */
     get unlocked() {
         disabled_by_challenge = [1, 7, 9].includes(game.challenge);
         return game.pp_bought[14] && !disabled_by_challenge;
     },
-}
+};

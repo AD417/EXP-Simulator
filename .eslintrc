@@ -14,7 +14,7 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "impliedStrict": false
-    }
+    } 
   },
   "plugins": ["@typescript-eslint"],
   "rules": {

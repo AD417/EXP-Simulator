@@ -43,19 +43,19 @@ const exp = {
      */
     challengeReduction: () => {
         switch (game.challenge) {
-            case 5:
-                return Math.min(
-                    (1 - game.prestige_time / (30 * game.tickspeed)) ** 4, 
-                    0
-                );
-            case 6:
-                if (game.dk_bought[3] && game.completions[5] >= 12)
-                    return 10 ** (-6 * (game.completions[5] - 11));
-                else return 1e-12;
-            case 9:
-                return 1e-16;
-            default: 
-                return 1;
+        case 5:
+            return Math.min(
+                (1 - game.prestige_time / (30 * game.tickspeed)) ** 4, 
+                0
+            );
+        case 6:
+            if (game.dk_bought[3] && game.completions[5] >= 12)
+                return 10 ** (-6 * (game.completions[5] - 11));
+            else return 1e-12;
+        case 9:
+            return 1e-16;
+        default: 
+            return 1;
         }
     },
 
@@ -116,4 +116,4 @@ const exp = {
 
         increment(increment_amount);
     },
-}
+};

@@ -7,12 +7,12 @@ const prestige = {
     amp_gain: (level) => {
         if (!prestige.can_reset(level)) return 0;
 
-        return Math.floor(((level - 40) / 20) ** 3)
+        return Math.floor(((level - 40) / 20) ** 3);
     },
 
     pp_gain: (level) => {
         if (!prestige.can_reset(level)) return 0;
 
-        return Math.floor(((level - 40) / 20) ** 2 - 1)
+        return Math.floor(((level - 40) / 20) ** 2 - 1);
     }
-}
+};

@@ -20,15 +20,15 @@ const achievements = {
     */
     award: (achievement_id) => {
         if (achievements.has(achievement_id)) return;
-        game.achievements[achievement_id] = true
-        let true_id = 0
+        game.achievements[achievement_id] = true;
+        let true_id = 0;
         for (let i = 0; i < achievement.achievements.length; i++) {
-            if (achievement.achievements[i].id === achievement_id) true_id = i
+            if (achievement.achievements[i].id === achievement_id) true_id = i;
         }
         if (document.visibilityState === "visible")
-            new notify(achievement.achievements[true_id].name, "#00ff00")
-        achievement.achievements[true_id].new = true
-        if (!meme) document.getElementById("achievements").style.color = "#00ff00"
+            new notify(achievement.achievements[true_id].name, "#00ff00");
+        achievement.achievements[true_id].new = true;
+        if (!meme) document.getElementById("achievements").style.color = "#00ff00";
     },
 
     /** 
@@ -257,4 +257,4 @@ const achievements = {
             achievements.award(35);
         
     }
-}
+};

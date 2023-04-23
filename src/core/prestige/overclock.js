@@ -6,7 +6,7 @@ const overclocker = {
     /**
      * Set the overclocker to boost EXP production.
      */
-    activate: () => {
+    activate() {
         if (!overclocker.unlocked) return;
         game.oc_state = overclocker.BOOSTING;
         game.oc_time = overclocker.boost_time();
@@ -40,6 +40,15 @@ const overclocker = {
         // TODO: it's possible for the boost to be infinite.
         // Add it here?
         return time;
+    },
+
+    /**
+     * How long the overclocker takes to complete a full recharge/discharge 
+     * cycle, in ticks.
+     */
+    get cycle_time() {
+        if (game.perks[20]) return 0;
+        return overclocker.boost_time() + overclocker.recharge_time();
     },
 
     /** 

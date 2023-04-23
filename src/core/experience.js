@@ -4,7 +4,7 @@ const exp = {
      * before any challenges / nerfs.
      * @return {Number} The raw multiplier to EXP production.
      */
-    unmodifiedMultiplier: () => {
+    unmodifiedMultiplier() {
         let multiplier = 
             game.ch_boost[0] *
             game.ch_boost[1] *
@@ -41,7 +41,7 @@ const exp = {
      * @return {Number} A multiplier to EXP production based on 
      * the current challenge's nerfs.
      */
-    challengeReduction: () => {
+    challengeReduction() {
         switch (game.challenge) {
         case 5:
             return Math.min(
@@ -58,6 +58,17 @@ const exp = {
             return 1;
         }
     },
+    
+    /**
+     * Determine the current multiplier to EXP production.
+     * @return {Number} The total multiplier to EXP production.
+     */
+    multiplier() {
+        const unmodifiedMultiplier = exp.unmodifiedMultiplier();
+        const challengeReduction = exp.challengeReduction();
+        const omegaChallengeReduction = exp.omegaChallengeReduction();
+        return unmodifiedMultiplier * challengeReduction * omegaChallengeReduction;
+    },
 
     // TODO: Figure out what other thing should address this.
     /**
@@ -65,7 +76,7 @@ const exp = {
      * @return {Number} A multiplier to EXP production based on 
      * the Omega challenge's nerfs.
      */
-    omegaChallengeReduction: () => {
+    omegaChallengeReduction() {
         if (!game.omega_challenge) return 1;
         if (game.challenge === 7) {
             return 1 / Math.sqrt(
@@ -78,14 +89,13 @@ const exp = {
     },
 
     /**
-     * Determine the current multiplier to EXP production.
-     * @return {Number} The total multiplier to EXP production.
+     * Determine the production per second before reduction from the EXP capacitor.
+     * @returns {Number}
      */
-    multiplier: () => {
-        const unmodifiedMultiplier = exp.unmodifiedMultiplier();
-        const challengeReduction = exp.challengeReduction();
-        const omegaChallengeReduction = exp.omegaChallengeReduction();
-        return unmodifiedMultiplier * challengeReduction * omegaChallengeReduction;
+    per_second_base() {
+        const eps = (game.exp_add + exp_fluct / 2) * exp.multiplier() * game.cps;
+        if (game.battery_mode === 1 || game.perks[8]) return eps * game.exp_battery;
+        return eps;
     },
 
     // TODO: determine if this function should be 
@@ -93,7 +103,7 @@ const exp = {
     /**
      * Incrment EXP based on the number of autoclickers and multipliers.
      */
-    autoclick: () => {
+    autoclick() {
         game.click_time += game.cps / delta_time;
         if (game.click_time < 1) return;
 

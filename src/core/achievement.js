@@ -34,7 +34,7 @@ const achievements = {
     /** 
     * Check if new autoclicker milestones have been reached. 
     */
-    check_autoclickers: () => {
+    check_autoclickers() {
         if (game.cps >=   30) achievements.award(53);
         if (game.cps >=  150) achievements.award(54);
         if (game.cps >= 1000) achievements.award(55);
@@ -43,7 +43,7 @@ const achievements = {
     /** 
     * Check if new AMP / Amplification Point milestones have been reached. 
     */
-    check_amp: () => {
+    check_amp() {
         if (game.amp >=  100) achievements.award(36);
         if (game.amp >=  1e4) achievements.award(37);
         if (game.amp >=  1e6) achievements.award(38);
@@ -63,7 +63,7 @@ const achievements = {
     /** 
     * Check if new challenge completion milestones have been reached. 
     */
-    check_challenge_completions: () => {
+    check_challenge_completions() {
         let total_completions = 0;
         for (let i = 0; i < 9; i++) {
             total_completions += game.completions[i];
@@ -78,7 +78,7 @@ const achievements = {
     /** 
     * Check if new EXP / Experience milestones have been reached. 
     */
-    check_exp: () => {
+    check_exp() {
         if (game.all_time_exp >=   1e6) achievements.award(19);
         if (game.all_time_exp >=   1e9) achievements.award(20);
         if (game.all_time_exp >=  1e12) achievements.award(21);
@@ -113,7 +113,7 @@ const achievements = {
     /** 
     * Check if new LVL / Level milestones have been reached. 
     */
-    check_level: () => {
+    check_level() {
         if (game.level >=      2) achievements.award(0);
         if (game.level >=     10) achievements.award(1);
         if (game.level >=     30) achievements.award(2);
@@ -147,7 +147,7 @@ const achievements = {
     /** 
     * Check if new Omega Level milestones have been reached. 
     */
-    check_omega_level: () => {
+    check_omega_level() {
         if (game.omega_level >=  1) achievements.award(162);
         if (game.omega_level >= 10) achievements.award(163);
         if (game.omega_level >= 30) achievements.award(164);
@@ -156,7 +156,7 @@ const achievements = {
     /** 
     * Check if new Prestige Count milestones have been reached. 
     */
-    check_prestige_count: () => {
+    check_prestige_count() {
         const total_prestiges = game.prestige + game.banked_prestige;
 
         if (total_prestiges >=   1) achievements.award(13);
@@ -171,7 +171,7 @@ const achievements = {
     /** 
     * Check if new Prism Level milestones have been reached. 
     */
-    check_prism_level: () => {
+    check_prism_level() {
         if (game.prism_level >=   1) achievements.award(126);
         if (game.prism_level >=  10) achievements.award(127);
         if (game.prism_level >=  30) achievements.award(125);
@@ -182,7 +182,7 @@ const achievements = {
     /** 
     * Check if new Quantize count milestones have been reached. 
     */
-    check_quantum_count: () => {
+    check_quantum_count() {
         if (game.quantum >=    1) achievements.award(120);
         if (game.quantum >=    3) achievements.award(121);
         if (game.quantum >=    5) achievements.award(122);
@@ -197,7 +197,7 @@ const achievements = {
     /** 
     * Check if new Quantize speedrun milestones have been reached. 
     */
-    check_quantum_speed: () => {
+    check_quantum_speed() {
         if (game.fastest_quantize <= game.tickspeed * 3600)
             achievements.award(128);
         if (game.fastest_quantize <= game.tickspeed * 300)
@@ -214,7 +214,7 @@ const achievements = {
     /** 
     * Check if new Reboot count milestones have been reached. 
     */
-    check_reboot_count: () => {
+    check_reboot_count() {
         if (game.reboot >=   1) achievements.award(56);
         if (game.reboot >=   3) achievements.award(57);
         if (game.reboot >=   5) achievements.award(58);
@@ -229,7 +229,7 @@ const achievements = {
     /** 
     * Check if new Reboot speed milestones have been reached. 
     */
-    check_reboot_speed: () => {
+    check_reboot_speed() {
         if (game.fastest_reboot < 3600 * game.tickspeed)
             achievements.award(60);
         if (game.fastest_reboot < 600 * game.tickspeed)
@@ -244,7 +244,7 @@ const achievements = {
     /** 
     * Check if new time played milestones have been reached. 
     */
-    check_playtime: () => {
+    check_playtime() {
         if (game.all_time >= 3600 * game.tickspeed) 
             achievements.award(31);
         if (game.all_time >= 21600 * game.tickspeed) 

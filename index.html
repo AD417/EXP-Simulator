@@ -261,19 +261,19 @@
                                     <p class="cap_text">
                                         Capacitance Mode:
                                     </p>
-                                    <button id="cap_off" class="button mode_active" onclick="set_capacitance(0)">
+                                    <button id="cap_off" class="button mode_active" onclick="capacitor.set_mode_to(0)">
                                         OFF
                                     </button>
-                                    <button id="cap_25" class="button" onclick="set_capacitance(1)">
+                                    <button id="cap_25" class="button" onclick="capacitor.set_mode_to(1)">
                                         25%
                                     </button>
-                                    <button id="cap_50" class="button" onclick="set_capacitance(2)">
+                                    <button id="cap_50" class="button" onclick="capacitor.set_mode_to(2)">
                                         50%
                                     </button>
-                                    <button id="cap_75" class="button" onclick="set_capacitance(3)">
+                                    <button id="cap_75" class="button" onclick="capacitor.set_mode_to(3)">
                                         75%
                                     </button>
-                                    <button id="cap_100" class="button" onclick="set_capacitance(4)">
+                                    <button id="cap_100" class="button" onclick="capacitor.set_mode_to(4)">
                                         100%
                                     </button>
                                     <button id="cap_auto" class="button autoup" onclick="cp_toggle()">
@@ -1652,6 +1652,7 @@
         <script src="src/core/experience.js" charset="utf-8" type="text/javascript"></script>
         <script src="src/core/achievement.js" charset="utf-8" type="text/javascript"></script>
         <script src="src/core/prestige/overclock.js" charset="utf-8" type="text/javascript"></script>
+        <script src="src/core/prestige/capacitor.js" charset="utf-8" type="text/javascript"></script>
 
         <script src="src/init.js" charset="utf-8" type="text/javascript"></script>
         <script src="src/auto.js" charset="utf-8" type="text/javascript"></script>

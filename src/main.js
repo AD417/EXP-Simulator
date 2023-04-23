@@ -195,7 +195,12 @@ function tick() {
     if (game.afk_time >= 600 * game.tickspeed)
         achievements.award(63);
 
-    //discharge automation
+
+
+
+    // capacitor discharge automation
+    capacitor.tick();
+    /*
     if (
         (game.pp_bought[35] || (game.pp_bought[32] && game.perks[9])) &&
         game.challenge !== 1 &&
@@ -257,6 +262,7 @@ function tick() {
             }
         }
     }
+    */
 
     //upgrade automation
     for (let i = 0; i < 6; i++) {

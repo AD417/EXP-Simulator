@@ -102,7 +102,7 @@ const capacitor = {
         increment(game.stored_exp / game.tickspeed * exp_per_second);
         game.stored_exp = 0;
 
-        if (overclocker.is_boosting) achievements.award(61);
+        if (overclocker.is_boosting) new Achievement(61).unlock();
     },
 
     /**
@@ -126,7 +126,7 @@ const capacitor = {
             format_num(base_exp_per_second)
         } EXP/sec`;
         const effective_exp_display = `Effective EXP Production: ${
-            format_num(base_exp_per_second * this.base_factor())
+            format_num(base_exp_per_second * this.base_factor)
         } EXP/sec`;
         let stored_time_display = `Stored EXP: ${
             format_time(this.stored_time())
@@ -259,7 +259,7 @@ const capacitor = {
     tick() {
         game.stored_exp = Math.min(
             300 * game.tickspeed, 
-            game.stored_exp + 1 - this.base_factor()
+            game.stored_exp + 1 - this.base_factor
         );
 
         if (this.should_auto_discharge()) this.discharge();

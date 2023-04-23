@@ -54,7 +54,7 @@ function increment(num) {
                 }
             }
 
-            achievements.check_level();
+            AchievementHandler.check_level();
 
             if (game.level >= 5 && !game.hold_notify) {
                 new notify("Protip: you can hold the EXP button", "#ffc400");
@@ -69,7 +69,7 @@ function increment(num) {
             }
         }
 
-        achievements.check_exp();
+        AchievementHandler.check_exp();
 
         game.exp = game.total_exp - Math.ceil(get_exp(game.level - 1));
         game.goal = Math.ceil(get_exp(game.level) - get_exp(game.level - 1));
@@ -190,7 +190,7 @@ function upgrade(id, max) {
                                 game.starter_kit +
                                 game.generator_kit);
                         
-                    achievements.check_autoclickers();
+                    AchievementHandler.check_autoclickers();
                 }
             }
             break;
@@ -429,7 +429,7 @@ function upgrade(id, max) {
                         2 *
                         (game.auto_tier + game.starter_kit + game.generator_kit);
                     
-                achievements.check_autoclickers();
+                AchievementHandler.check_autoclickers();
             }
             break;
         case 2:
@@ -868,7 +868,7 @@ function upgrade_prism() {
         game.prism_level++;
         game.prism_boost = game.prism_level * (game.prism_level + 4);
 
-        achievements.check_prism_level();
+        AchievementHandler.check_prism_level();
     }
 }
 
@@ -904,7 +904,7 @@ function collapse() {
             game.omega_points++;
         }
 
-        achievements.check_omega_level();
+        AchievementHandler.check_omega_level();
     }
 }
 
@@ -984,7 +984,7 @@ function enter_omega_challenge() {
                     1000000 ** ((highest_level - 65536) / 32768)
                 );
 
-                achievements.check_quantum_count();
+                AchievementHandler.check_quantum_count();
 
                 if (!game.achievements[168] && game.hps === 0)
                     get_achievement(168);
@@ -1015,7 +1015,7 @@ function enter_omega_challenge() {
                 if (game.reboot_time < game.fastest_quantize)
                     game.fastest_quantize = game.reboot_time;
 
-                achievements.check_quantum_speed();
+                AchievementHandler.check_quantum_speed();
 
                 if (game.reboot_highest_level > game.all_time_highest_level)
                     game.all_time_highest_level = game.reboot_highest_level;

@@ -110,9 +110,9 @@ function prestige() {
             game.amp_time[0] = game.time / game.tickspeed;
             game.amp_eff[0] = game.amp_amount[0] / game.amp_time[0];
 
-            achievements.check_prestige_count();
+            AchievementHandler.check_prestige_count();
 
-            achievements.check_amp();
+            AchievementHandler.check_amp();
 
             if (game.time < game.fastest_prestige)
                 game.fastest_prestige = game.time;
@@ -283,9 +283,9 @@ function prestige() {
             game.amp_time[0] = game.time / game.tickspeed;
             game.amp_eff[0] = game.amp_amount[0] / game.amp_time[0];
 
-            achievements.check_prestige_count();
+            AchievementHandler.check_prestige_count();
 
-            achievements.check_amp();
+            AchievementHandler.check_amp();
 
             if (game.time < game.fastest_prestige)
                 game.fastest_prestige = game.time;
@@ -676,7 +676,7 @@ function reboot() {
                         break;
                     }
 
-                    achievements.check_challenge_completions();
+                    AchievementHandler.check_challenge_completions();
 
                     if (!game.achievements[92] && game.blind)
                         get_achievement(92);
@@ -778,7 +778,7 @@ function reboot() {
             game.amp_time = new Array(5).fill(-1);
             game.amp_eff = new Array(5).fill(-1);
 
-            achievements.check_reboot_count();
+            AchievementHandler.check_reboot_count();
 
             if (!game.achievements[62] && game.no_automation)
                 get_achievement(62);
@@ -802,7 +802,7 @@ function reboot() {
             if (game.prestige_time < game.fastest_reboot)
                 game.fastest_reboot = game.prestige_time;
             
-            achievements.check_reboot_speed();
+            AchievementHandler.check_reboot_speed();
 
             if (game.perks[18] && game.challenge === 0) {
                 game.true_banked_prestige += Math.floor(game.prestige / 4);
@@ -1119,7 +1119,7 @@ function quantize() {
                     1000000 ** ((highest_level - 65536) / 32768)
                 );
 
-            achievements.check_quantum_count();
+            AchievementHandler.check_quantum_count();
 
             if (!game.achievements[168] && game.hps === 0) get_achievement(168);
 
@@ -1153,7 +1153,7 @@ function quantize() {
             if (game.reboot_time < game.fastest_quantize)
                 game.fastest_quantize = game.reboot_time;
 
-            achievements.check_quantum_speed();
+            AchievementHandler.check_quantum_speed();
 
             if (game.reboot_highest_level > game.all_time_highest_level)
                 game.all_time_highest_level = game.reboot_highest_level;

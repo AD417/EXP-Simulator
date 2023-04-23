@@ -32,7 +32,7 @@ function tick() {
                         delta_time
                     );
                         
-                achievements.check_amp();
+                AchievementHandler.check_amp();
             }
         } else {
             if (game.level >= game.pr_min) {
@@ -52,7 +52,7 @@ function tick() {
                             delta_time
                     );
                     
-                achievements.check_amp();
+                AchievementHandler.check_amp();
             }
         }
     }
@@ -67,13 +67,13 @@ function tick() {
     game.afk_time += 30 / delta_time;
 
     //time based achievements
-    achievements.check_playtime();
+    AchievementHandler.check_playtime();
 
     //spontaneous fortune
     if (Math.floor(game.all_time) % game.tickspeed === 0) {
         const roll = Math.random();
         if (!game.achievements[66] && roll < 1 / 7777) {
-            achievements.award(66);
+            new Achievement(66).unlock();
         }
     }
     
@@ -189,11 +189,11 @@ function tick() {
         game.pp_bought[25] &&
         game.pp_bought[32]
     )
-        achievements.award(50);
+        new Achievement(50).unlock();
 
     //a whole lot of nothing
     if (game.afk_time >= 600 * game.tickspeed)
-        achievements.award(63);
+        new Achievement(63).unlock();
 
 
 
